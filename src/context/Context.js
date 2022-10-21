@@ -12,8 +12,9 @@ const Context = ({children}) => {
         try{
             const req = await fetch(URL)
             const resp = await req.json();
-            setData(resp);
-            console.log(resp);
+            const result = resp.articles;
+            setData(result);
+            // console.log(resp);
         }catch(err){
             console.log(err);
         }
