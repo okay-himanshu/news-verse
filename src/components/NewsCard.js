@@ -7,6 +7,9 @@ const NewsCard = () => {
   const { data, state, setState } = useGlobalContext();
   const navigate = useNavigate();
 
+  const handleLoadMore = () => {
+    setState(state + 12);
+  };
 
   return (
     <>
@@ -49,7 +52,7 @@ const NewsCard = () => {
           );
         })}
         <button
-          onClick={() => setState(state + 5)}
+          onClick={handleLoadMore}
           className="bg-violet-900 p-1 text-white font-medium rounded  w-24"
         >
           Load More
