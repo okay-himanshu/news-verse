@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import Image from "../assets/1.png";
+// import Loader from "./Loader";
 
 const NewsCard = () => {
   const { data, state, setState } = useGlobalContext();
