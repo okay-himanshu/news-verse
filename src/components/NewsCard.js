@@ -9,7 +9,7 @@ const NewsCard = () => {
   const navigate = useNavigate();
 
   const handleLoadMore = () => {
-    setState(state + 12);
+    setState(state + 6);
   };
 
   return (

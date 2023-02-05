@@ -5,7 +5,7 @@ const AppContext = createContext();
 const Context = ({ children }) => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState("Tesla");
-  const [state, setState] = useState(12);
+  const [state, setState] = useState(9);
 
   const URL = `https://newsapi.org/v2/everything?q=${query}&apiKey=0d080d13836b4daa8ff82f78f2be173d&pageSize=${state}`;
 
