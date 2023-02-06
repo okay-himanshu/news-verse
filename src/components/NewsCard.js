@@ -1,64 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useGlobalContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import Image from "../assets/1.png";
-// import Loader from "./Loader";
+import { ThreeDots } from "react-loader-spinner";
 
 const NewsCard = () => {
-  const { data, state, setState } = useGlobalContext();
+  const { data, state, setState, loader } = useGlobalContext();
   const navigate = useNavigate();
 
   const handleLoadMore = () => {
-    setState(state + 6);
+    setState(state + 3);
   };
 
   return (
     <>
-      <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-        {data.map((news, index) => {
-          const {
-            author,
-            title,
-            description,
-            url,
-            urlToImage,
-            content,
-            publishedAt,
-          } = news;
-          return (
-            <div className="rounded overflow-hidden shadow-lg" key={index}>
-              <img className="w-full" src={""} alt="image" />
-              <div className="px-6 py-2">
-                <div className="font-semibold text-xl mb-2 ">
-                  {title.slice(0, 40) + "..."}
+      {loader ? (
+        <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+          {data.map((news, index) => {
+            const {
+              author,
+              title,
+              description,
+              url,
+              urlToImage,
+              content,
+              publishedAt,
+            } = news;
+            return (
+              <div className="rounded overflow-hidden shadow-lg" key={index}>
+                <img className="w-full" src={urlToImage} alt="image" />
+                <div className="px-6 py-2">
+                  <div className="font-semibold text-xl mb-2 ">
+                    {title.slice(0, 40) + "..."}
+                  </div>
+                  <p className="text-gray-700 text-base">
+                    {content.slice(0, 150) + "..."}
+                  </p>
                 </div>
-                <p className="text-gray-700 text-base">
-                  {content.slice(0, 150) + "..."}
-                </p>
+                <div className="px-6 pt-0 pb-0">
+                  <p className="text-gray-700 text-base underline">
+                    author : {author}
+                  </p>
+                </div>
+                <div className="px-6 pt-2 pb-10">
+                  <button
+                    className="bg-violet-900 p-1 text-white font-medium rounded"
+                    onClick={() => navigate(window.open(url))}
+                  >
+                    Read more
+                  </button>
+                </div>
               </div>
-              <div className="px-6 pt-0 pb-0">
-                <p className="text-gray-700 text-base underline">
-                  author : {author}
-                </p>
-              </div>
-              <div className="px-6 pt-2 pb-10">
-                <button
-                  className="bg-violet-900 p-1 text-white font-medium rounded"
-                  onClick={() => navigate(window.open(url))}
-                >
-                  Read more
-                </button>
-              </div>
-            </div>
-          );
-        })}
-        <button
-          onClick={handleLoadMore}
-          className="bg-violet-900 p-1 text-white font-medium rounded  w-24"
-        >
-          Load More
-        </button>
-      </div>
+            );
+          })}
+          <button
+            onClick={handleLoadMore}
+            className="bg-violet-900 p-1 text-white font-medium rounded  w-24"
+          >
+            Load More
+          </button>
+        </div>
+      ) : (
+        <div className="w-full flex justify-center">
+          <ThreeDots width="80" height="90" color="blue" />
+        </div>
+      )}
     </>
   );
 };
