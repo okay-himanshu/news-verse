@@ -1,8 +1,8 @@
 import React from "react";
 import { useGlobalContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
-import Image from "../assets/1.png";
 import { ThreeDots } from "react-loader-spinner";
+import image404 from "../assets/image404.png";
 
 const NewsCard = () => {
   const { data, state, setState, loader } = useGlobalContext();
@@ -24,22 +24,31 @@ const NewsCard = () => {
               url,
               urlToImage,
               content,
-              publishedAt,
+              source,
             } = news;
+
+            console.log(source);
             return (
-              <div className="rounded overflow-hidden shadow-lg" key={index}>
-                <img className="w-full" src={urlToImage} alt="image" />
+              <div
+                className="rounded overflow-hidden shadow-lg hover:-translate-y-2 transition-all delay-75 hover:bg-slate-100"
+                key={index}
+              >
+                <img
+                  className="w-full"
+                  src={urlToImage ? urlToImage : image404}
+                  alt="image"
+                />
                 <div className="px-6 py-2">
                   <div className="font-semibold text-xl mb-2 ">
                     {title.slice(0, 40) + "..."}
                   </div>
                   <p className="text-gray-700 text-base">
-                    {content.slice(0, 150) + "..."}
+                    {content.slice(0, 200)}
                   </p>
                 </div>
                 <div className="px-6 pt-0 pb-0">
                   <p className="text-gray-700 text-base underline">
-                    author : {author}
+                    source : {source.name ? source.name : "source not found"}
                   </p>
                 </div>
                 <div className="px-6 pt-2 pb-10">
