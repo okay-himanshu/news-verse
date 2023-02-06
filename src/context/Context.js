@@ -25,7 +25,10 @@ const Context = ({ children }) => {
   };
 
   useEffect(() => {
-    newsAPI();
+    const cleanUp = setTimeout(() => {
+      newsAPI();
+    }, 300);
+    return () => clearTimeout(cleanUp);
   }, [query, state]);
 
   return (
